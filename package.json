@@ -1,0 +1,14 @@
+{
+  "name": "tree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": "f01zy",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.10.7",
+    "process": "^0.11.10"
+  }
+}

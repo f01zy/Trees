@@ -1,0 +1,1 @@
+export type TFormat = "(0)" | "0"
