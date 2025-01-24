@@ -1,14 +1,12 @@
-import { BTNode, BinaryTree } from "./binaryTree";
+import { BTNode, BT } from "./BT";
 
-export class BinarySearchTree<T> extends BinaryTree<T> {
-  constructor(entry: T) {
+export class BSTree<T> extends BT<T> {
+  constructor(entry: BTNode<T>) {
     super(entry)
   }
 
   public append(node: BTNode<T>, entry: BTNode<T> = this.entry): void {
-    if (entry.value === node.value) return console.error("this value is exists")
-
-    else if (entry.value < node.value) {
+    if (entry.value <= node.value) {
       if (entry.left) return this.append(node, entry.left)
       else entry.left = node; return
     }

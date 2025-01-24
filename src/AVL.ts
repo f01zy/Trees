@@ -1,30 +1,28 @@
-import { BinarySearchTree } from "./BST";
-import { BTNode } from "./binaryTree";
+import { BSTree } from "./BST";
+import { BTNode } from "./BT";
 
 export class AVLNode<T> extends BTNode<T> {
-  constructor(value: T) {
+  public height: number = 0
+
+  constructor(
+    public value: T,
+    public left?: AVLNode<T>,
+    public right?: AVLNode<T>,
+    public parent?: AVLNode<T>
+  ) {
     super(value)
   }
-
-  public left?: AVLNode<T>
-  public right?: AVLNode<T>
-  public parent?: AVLNode<T>
-  public height: number = 0
 }
 
-export class AVLTree<T> extends BinarySearchTree<T> {
-  constructor(entry: T) {
+export class AVLTree<T> extends BSTree<T> {
+  constructor(
+    protected override entry: AVLNode<T>
+  ) {
     super(entry)
-    this.entry = new AVLNode<T>(entry)
+    this.entry = entry
   }
-
-  protected override readonly entry: AVLNode<T>
 
   public override append(node: AVLNode<T>, entry: AVLNode<T> = this.entry): void {
-
-  }
-
-  private changeHeight(node: AVLNode<T>): void {
 
   }
 }
