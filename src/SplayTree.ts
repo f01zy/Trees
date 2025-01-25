@@ -1,7 +1,7 @@
 /*
+Косое дерево - самонастраивающаяся структура данных бинарного дерева поиска. Она автоматически реорганизует себя таким образом, что часто используемые или вставляемые элементы становятся ближе к корневому узлу.
 
-Еще не дописал. Некорректно работает функция rebalance + выглядит ужасно.
-
+Недописанно.
 */
 
 import { BSTree } from "./BST";
@@ -12,6 +12,10 @@ export class SplayTree<T> extends BSTree<T> {
     super(entry)
   }
 
+  /**
+   * Правый поворот узла.
+   * @param q - Поворачиваемый узел.
+   */
   private rotateR(p: BTNode<T>): BTNode<T> {
     const q = p.left; if (!q) return p
     p.left = q.right
@@ -19,6 +23,10 @@ export class SplayTree<T> extends BSTree<T> {
     return q
   }
 
+  /**
+   * Левый поворот узла.
+   * @param q - Поворачиваемый узел.
+   */
   private rotateL(q: BTNode<T>): BTNode<T> {
     const p = q.right; if (!p) return q
     q.right = p.left
@@ -26,17 +34,23 @@ export class SplayTree<T> extends BSTree<T> {
     return p
   }
 
+  /**
+   * Балансировка дерева после поиска.
+   * @param q - Найденный узел.
+   */
   private rebalance(entry: BTNode<T>): void {
-    if (this.entry.value === entry.value) return
-    else if (this.entry.left && this.entry.left.value === entry.value) this.rotateR(this.entry)
-    else if (this.entry.right && this.entry.right.value === entry.value) this.rotateL(this.entry)
-    else if (this.entry.left && this.entry.left.left && this.entry.left.left.value === entry.value) { const temp = this.entry.left; this.rotateR(this.entry); this.rotateR(temp) }
-    else if (this.entry.right && this.entry.right.right && this.entry.right.right.value === entry.value) { const temp = this.entry.right; this.rotateL(this.entry); this.rotateL(temp) }
-    else if (this.entry.left && this.entry.left.right && this.entry.left.right.value === entry.value) { this.rotateL(this.entry.left); this.rotateR(this.entry) }
-    else if (this.entry.right && this.entry.right.left && this.entry.right.left.value === entry.value) { this.rotateR(this.entry.right); this.rotateL(entry) }
+    /* 
+    Дописать
+    */
   }
 
-  protected override search(value: T, entry: BTNode<T>): BTNode<T> | null {
+  /**
+   * Ищет узел по значению.
+   * @param value - Искоемое значение.
+   * @param entry - Текущий узел, в котором происходит поиск.
+   * @returns Узел с искоемым значением, либо null, в случае, если такой узел не найден.
+   */
+  public override search(value: T, entry: BTNode<T>): BTNode<T> | null {
     if (entry.value === value) {
       this.rebalance(entry)
       return entry
