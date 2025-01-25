@@ -5,6 +5,14 @@ export class BSTree<T> extends BT<T> {
     super(entry)
   }
 
+  protected search(value: T, entry: BTNode<T>): BTNode<T> | null {
+    if (entry.value === value) return entry
+    else if (entry.value < value && entry.left) return this.search(value, entry.left)
+    else if (entry.value > value && entry.right) return this.search(value, entry.right)
+
+    return null
+  }
+
   public append(value: T, entry: BTNode<T> = this.entry): void {
     if (entry.value < value) {
       if (entry.left) return this.append(value, entry.left)
@@ -19,13 +27,5 @@ export class BSTree<T> extends BT<T> {
 
   public get(value: T): BTNode<T> | null {
     return this.search(value, this.entry)
-  }
-
-  private search(value: T, entry: BTNode<T>): BTNode<T> | null {
-    if (entry.value === value) return entry
-    else if (entry.value < value && entry.left) return this.search(value, entry.left)
-    else if (entry.value > value && entry.right) return this.search(value, entry.right)
-
-    return null
   }
 }

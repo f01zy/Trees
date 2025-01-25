@@ -26,7 +26,9 @@ export class AVLTree<T> extends BSTree<T> {
   }
 
   private factor(p?: AVLNode<T>): number {
-    return this.height(p?.left) - this.height(p?.right)
+    const f = this.height(p?.left) - this.height(p?.right)
+    console.log(f)
+    return f
   }
 
   private fixH(p: AVLNode<T>): void {
