@@ -27,7 +27,7 @@ import { BTNode } from "./BT"
     numbers.sort(() => Math.random() - 0.5)
 
     numbers.forEach(num => {
-      tree.append(new BTNode<number>(num))
+      tree.append(num)
     })
 
     tree.visualize("(0)", args.distance)

@@ -5,15 +5,15 @@ export class BSTree<T> extends BT<T> {
     super(entry)
   }
 
-  public append(node: BTNode<T>, entry: BTNode<T> = this.entry): void {
-    if (entry.value <= node.value) {
-      if (entry.left) return this.append(node, entry.left)
-      else entry.left = node; return
+  public append(value: T, entry: BTNode<T> = this.entry): void {
+    if (entry.value < value) {
+      if (entry.left) return this.append(value, entry.left)
+      else entry.left = new BTNode(value)
     }
 
-    else if (entry.value > node.value) {
-      if (entry.right) return this.append(node, entry.right)
-      else entry.right = node; return
+    if (entry.value > value) {
+      if (entry.right) return this.append(value, entry.right)
+      else entry.right = new BTNode(value)
     }
   }
 
