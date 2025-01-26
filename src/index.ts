@@ -4,7 +4,7 @@
 
 import { AVLNode, AVLTree } from "./AVL"
 import { BSTree } from "./BST"
-import { BTNode } from "./BT"
+import { BT, BTNode } from "./BT"
 import { SplayTree } from "./SplayTree"
 
 ((): void => {
