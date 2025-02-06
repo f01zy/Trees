@@ -7,8 +7,9 @@ import { TFormat } from "./types/types/format.types";
 export class BTNode<T> {
   constructor(
     public value: T,
+    public parent?: BTNode<T>,
     public left?: BTNode<T>,
-    public right?: BTNode<T>
+    public right?: BTNode<T>,
   ) {
     this.value = value
   }

@@ -1,7 +1,5 @@
 /*
 Косое дерево - самонастраивающаяся структура данных бинарного дерева поиска. Она автоматически реорганизует себя таким образом, что часто используемые или вставляемые элементы становятся ближе к корневому узлу.
-
-Недописанно.
 */
 
 import { BSTree } from "./BST";
@@ -39,9 +37,17 @@ export class SplayTree<T> extends BSTree<T> {
    * @param q - Найденный узел.
    */
   private rebalance(entry: BTNode<T>): void {
-    /* 
-    Дописать
-    */
+    if (!entry) return
+
+    while (entry !== this.entry && entry === entry.parent!.right) {
+      entry = this.rotateL(entry.parent!)
+    }
+
+    while (entry !== this.entry && entry === entry.parent!.left) {
+      entry = this.rotateR(entry.parent!)
+    }
+
+    this.entry = entry
   }
 
   /**
@@ -50,7 +56,7 @@ export class SplayTree<T> extends BSTree<T> {
    * @param entry - Текущий узел, в котором происходит поиск.
    * @returns Узел с искоемым значением, либо null, в случае, если такой узел не найден.
    */
-  public override search(value: T, entry: BTNode<T>): BTNode<T> | null {
+  public override search(value: T, entry: BTNode<T> = this.entry): BTNode<T> | null {
     if (entry.value === value) {
       this.rebalance(entry)
       return entry

@@ -2,7 +2,6 @@
 Точка входа.
 */
 
-import { AVLNode, AVLTree } from "./AVL"
 import { BSTree } from "./BST"
 import { BT, BTNode } from "./BT"
 import { SplayTree } from "./SplayTree"
@@ -50,33 +49,30 @@ import { SplayTree } from "./SplayTree"
     args[name] = parseInt(argValue)
   }
 
-  let tree: BSTree<string> | AVLTree<string> | SplayTree<string>
+  let tree: BSTree<number> | SplayTree<number>
 
   switch (args.type) {
     case 1:
-      tree = new BSTree<string>(new BTNode<string>("А"))
+      tree = new BSTree<number>(new BTNode<number>(0))
       break
 
     case 2:
-      tree = new AVLTree<string>(new AVLNode<string>("А"))
-      break
-
-    case 3:
-      tree = new SplayTree<string>(new BTNode<string>("А"))
+      tree = new SplayTree<number>(new BTNode<number>(0))
       break
 
     default:
       throw new Error("--type is required")
   }
 
-  const letters = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
-  const strings: Array<string> = []
-  for (let i = 0; i <= args.height - 1; i++) strings.push(letters.split("")[i % letters.length])
-  strings.sort(() => Math.random() - 0.5)
+  const numbers: Array<number> = []
+  for (let i = 0; i <= args.height - 1; i++) numbers.push(i)
+  numbers.sort(() => Math.random() - 0.5)
 
-  strings.forEach(num => {
+  numbers.forEach(num => {
     tree.append(num)
   })
 
-  tree.visualize("(0)", args.distance)
+  tree.visualize("0", 1)
+  tree.search(5)
+  tree.visualize("0", 1)
 })()

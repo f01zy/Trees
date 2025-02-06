@@ -15,7 +15,7 @@ export class BSTree<T> extends BT<T> {
    * @param entry - Текущий узел, в котором происходит поиск.
    * @returns Узел с искоемым значением, либо null, в случае, если такой узел не найден.
    */
-  public search(value: T, entry: BTNode<T>): BTNode<T> | null {
+  public search(value: T, entry: BTNode<T> = this.entry): BTNode<T> | null {
     if (entry.value === value) return entry
     else if (entry.value < value && entry.left) return this.search(value, entry.left)
     else if (entry.value > value && entry.right) return this.search(value, entry.right)
@@ -29,14 +29,16 @@ export class BSTree<T> extends BT<T> {
    * @param entry - Текущий узел, в котором ведется поиск места для нового узла.
    */
   public append(value: T, entry: BTNode<T> = this.entry): void {
+    if (entry.value === value) console.error("value already exists")
+
     if (entry.value < value) {
       if (entry.left) return this.append(value, entry.left)
-      else entry.left = new BTNode(value)
+      else entry.left = new BTNode(value, entry)
     }
 
     if (entry.value > value) {
       if (entry.right) return this.append(value, entry.right)
-      else entry.right = new BTNode(value)
+      else entry.right = new BTNode(value, entry)
     }
   }
 }
